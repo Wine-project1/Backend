@@ -1,4 +1,6 @@
 package com.example.demo.enums;
 
-public class RentalStatus {
+public enum RentalStatus {
+    LOANED,
+    RETURNED
 }
