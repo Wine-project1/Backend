@@ -32,22 +32,23 @@ public class User {
     @Column(nullable = false)
     private String password = "1234";
 
+    @Transient
     private boolean passwordEncoded;
 
-    @Column(nullable = false)
+    @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
     private UserRole userRole = UserRole.STUDENT;
 
-    @Column(nullable = false)
+    @Column(name = "grade", nullable = false)
     private Integer grade;
 
-    @Column(nullable = false)
+    @Column(name = "class_num", nullable = false)
     private Integer classNum;
 
-    @Column(nullable = false)
+    @Column(name = "number", nullable = false)
     private Integer number;
 
-    @Column(nullable = false)
+    @Column(name = "is_active", nullable = false)
     private Boolean isActive = true;
 
     @CreatedDate
