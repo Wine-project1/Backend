@@ -2,9 +2,13 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "books")
@@ -12,18 +16,41 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
 public class Book {
-//    컬럼명	타입	제약	설명
-//    id	BIGINT	PK, AUTO_INCREMENT	고유 식별자
-//    manage_number	VARCHAR(50)	UNIQUE, NOT NULL	관리번호
-//    title	VARCHAR(255)	NOT NULL	도서명
-//    is_available	BOOLEAN	DEFAULT TRUE	대출 가능 여부
-//    created_at	DATETIME	NOT NULL	등록일시
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, unique = true, length = 50)
+    private String manageNumber;
 
+    @Column(nullable = false, length = 255)
+    private String title;
 
+    @Column(nullable = false)
+    private Boolean isAvailable = true;
+
+    @CreatedDate
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @Builder
+    public Book(String manageNumber, String title) {
+        this.manageNumber = manageNumber;
+        this.title = title;
+        this.isAvailable = true;
+    }
+
+    public void update(String manageNumber, String title) {
+        this.manageNumber = manageNumber;
+        this.title = title;
+    }
+
+    public void markUnavailable() {
+        this.isAvailable = false;
+    }
+
+    public void markAvailable() {
+        this.isAvailable = true;
+    }
 }
