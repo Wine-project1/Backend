@@ -34,7 +34,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false,unique = true,length = 20)
+    @Column(name = "student_id", nullable = false, unique = true, length = 20)
     private String userId;   //stu250307
 
     @Column(nullable = false,length = 50)
@@ -46,26 +46,27 @@ public class User {
     @Column(nullable = false)
     private String password = "1234";
 
+    @Transient
     private boolean passwordEncoded;
 
-    @Column(nullable = false)
+    @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
     private UserRole userRole = UserRole.STUDENT;
 
-    @Column(nullable = false)
+    @Column(name = "grade", nullable = false)
     private Integer grade;
 
-    @Column(nullable = false)
+    @Column(name = "class_num", nullable = false)
     private Integer classNum;
 
-    @Column(nullable = false)
+    @Column(name = "number", nullable = false)
     private Integer number;
 
-    @Column(nullable = false)
+    @Column(name = "is_active", nullable = false)
     private Boolean isActive = true;
 
     @CreatedDate
-    @Column(nullable = false,updatable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
 
